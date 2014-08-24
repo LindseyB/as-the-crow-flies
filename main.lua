@@ -34,6 +34,7 @@ function love.load()
 
 	line = 1
 	delay = 0
+	speed = 200
 end
 
 function love.update(dt)
@@ -44,6 +45,12 @@ function love.update(dt)
 	if delay >= 3 then
 		line = (line % #lines) + 1
 		delay = 0
+	end
+
+	if love.keyboard.isDown(" ") then
+		animation_y = animation_y - speed * dt
+	else
+		animation_y = animation_y + speed * dt
 	end
 end
 
@@ -72,6 +79,10 @@ function love.draw()
 	love.graphics.setColor(255, 255, 255)
 
 	love.graphics.draw(snow_system)
+end
 
-
+function love.keypressed(key, isrepeat)
+	if key == "escape" then
+    	love.event.quit()
+    end
 end
