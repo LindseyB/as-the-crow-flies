@@ -23,8 +23,10 @@ function love.load()
 	animation:set_animation(true)
 	animation_x = (love.graphics.getWidth() - animation.width)/2
 	animation_y = (love.graphics.getHeight() - animation.height)/2
+	text_x = love.graphics.getWidth()
+	text_y = math.random(love.graphics.getHeight())
 
-	font = love.graphics.newFont("AmaticSC-Regular.ttf", 60)
+	font = love.graphics.newFont("AmaticSC-Regular.ttf", 80)
 	love.graphics.setFont(font)
 
 	lines = {}
@@ -33,18 +35,20 @@ function love.load()
 	end
 
 	line = 1
-	delay = 0
 	speed = 200
+	text_speed = 200
 end
 
 function love.update(dt)
-	delay = delay + dt
 	snow_system:update(dt)
 	animation:update(dt)
 
-	if delay >= 3 then
+	text_x = text_x - speed * dt
+
+	if text_x <= 0 then
 		line = (line % #lines) + 1
-		delay = 0
+		text_x = love.graphics.getWidth()
+		text_y = math.random(love.graphics.getHeight())
 	end
 
 	if love.keyboard.isDown(" ") then
@@ -72,9 +76,9 @@ function love.draw()
 
 	animation:draw(animation_x, animation_y)
 
-	love.graphics.setColor(100, 100, 100, 255-(delay*80))
+	love.graphics.setColor(100, 100, 100, 255)
 
-	love.graphics.printf(lines[line], 0, 100, love.graphics.getWidth(), "center")
+	love.graphics.print(lines[line], text_x, text_y)
 
 	love.graphics.setColor(255, 255, 255)
 
