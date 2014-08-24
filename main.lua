@@ -45,7 +45,7 @@ function love.update(dt)
 
 	text_x = text_x - speed * dt
 
-	if text_x <= 0 then
+	if text_x <= -(font:getWidth(lines[line])) then
 		line = (line % #lines) + 1
 		text_x = love.graphics.getWidth()
 		text_y = math.random(love.graphics.getHeight())
@@ -55,6 +55,13 @@ function love.update(dt)
 		animation_y = animation_y - speed * dt
 	else
 		animation_y = animation_y + speed * dt
+	end
+
+	if colliding_check(animation_x, animation_y, animation.width, animation.height,
+		text_x, text_y, font:getWidth(lines[line]), font:getHeight()) then
+		print("deeead")
+	elseif animation_y >= love.graphics.getHeight() then
+		print("also dead")
 	end
 end
 
@@ -72,16 +79,16 @@ function love.draw()
 		end
 	end
 
+	-- crow
 	love.graphics.setColor(255, 255, 255, 130)
-
 	animation:draw(animation_x, animation_y)
 
+	-- poem
 	love.graphics.setColor(100, 100, 100, 255)
-
 	love.graphics.print(lines[line], text_x, text_y)
 
+	-- snow
 	love.graphics.setColor(255, 255, 255)
-
 	love.graphics.draw(snow_system)
 end
 
@@ -89,4 +96,12 @@ function love.keypressed(key, isrepeat)
 	if key == "escape" then
     	love.event.quit()
     end
+end
+
+
+function colliding_check(x1,y1,w1,h1,x2,y2,w2,h2)
+  return x1 < x2+w2 and
+         x2 < x1+w1 and
+         y1 < y2+h2 and
+         y2 < y1+h1
 end
