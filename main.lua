@@ -37,6 +37,7 @@ function love.load()
 	line = 1
 	speed = 200
 	text_speed = 200
+	game_over = false
 end
 
 function love.update(dt)
@@ -59,9 +60,9 @@ function love.update(dt)
 
 	if colliding_check(animation_x, animation_y, animation.width, animation.height,
 		text_x, text_y, font:getWidth(lines[line]), font:getHeight()) then
-		print("deeead")
-	elseif animation_y >= love.graphics.getHeight() then
-		print("also dead")
+		game_over = true
+	elseif animation_y >= love.graphics.getHeight() or animation_y <= -(animation.height) then
+		game_over = true
 	end
 end
 
@@ -79,13 +80,18 @@ function love.draw()
 		end
 	end
 
-	-- crow
-	love.graphics.setColor(255, 255, 255, 130)
-	animation:draw(animation_x, animation_y)
+	if game_over then
+		love.graphics.setColor(100, 100, 100, 255)
+		love.graphics.printf("Game Over - Press Space", 0, 100, love.graphics.getWidth(), "center")
+	else
+		-- crow
+		love.graphics.setColor(255, 255, 255, 130)
+		animation:draw(animation_x, animation_y)
 
-	-- poem
-	love.graphics.setColor(100, 100, 100, 255)
-	love.graphics.print(lines[line], text_x, text_y)
+		-- poem
+		love.graphics.setColor(100, 100, 100, 255)
+		love.graphics.print(lines[line], text_x, text_y)
+	end
 
 	-- snow
 	love.graphics.setColor(255, 255, 255)
@@ -94,14 +100,25 @@ end
 
 function love.keypressed(key, isrepeat)
 	if key == "escape" then
-    	love.event.quit()
-    end
+		love.event.quit()
+	elseif game_over and key == " " then
+		reset()
+	end
 end
 
 
 function colliding_check(x1,y1,w1,h1,x2,y2,w2,h2)
   return x1 < x2+w2 and
-         x2 < x1+w1 and
-         y1 < y2+h2 and
-         y2 < y1+h1
+		 x2 < x1+w1 and
+		 y1 < y2+h2 and
+		 y2 < y1+h1
+end
+
+function reset()
+	animation_x = (love.graphics.getWidth() - animation.width)/2
+	animation_y = (love.graphics.getHeight() - animation.height)/2
+	text_x = love.graphics.getWidth()
+	text_y = math.random(love.graphics.getHeight())
+	line = 1
+	game_over = false
 end
