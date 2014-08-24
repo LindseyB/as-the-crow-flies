@@ -67,17 +67,17 @@ function love.update(dt)
 	snow_system:update(dt)
 	animation:update(dt)
 
-	score = score + dt
-	print(score)
-
 	background = (background % #backgrounds) + 1
+
+	if game_over then return end
 
 	text_x = text_x - speed * dt
 
 	if text_x <= -(font:getWidth(lines[line])) then
+		score = score + 1
 		line = (line % #lines) + 1
 		text_x = love.graphics.getWidth()
-		text_y = math.random(love.graphics.getHeight())
+		text_y = math.random(love.graphics.getHeight()-font:getHeight())
 	end
 
 	if love.keyboard.isDown(" ") then
@@ -101,8 +101,11 @@ function love.draw()
 
 	if game_over then
 		love.graphics.setColor(100, 100, 100, 255)
-		love.graphics.printf("Game Over - Press Space", 0, 100, love.graphics.getWidth(), "center")
+		love.graphics.printf("Game Over - Press Space\nYour Score Was: " .. score, 0, 100, love.graphics.getWidth(), "center")
 	else
+		-- score
+		love.graphics.print(score, 10, 10)
+
 		-- crow
 		love.graphics.setColor(255, 255, 255, 130)
 		animation:draw(animation_x, animation_y)
