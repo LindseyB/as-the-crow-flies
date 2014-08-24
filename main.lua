@@ -29,20 +29,48 @@ function love.load()
 	font = love.graphics.newFont("AmaticSC-Regular.ttf", 80)
 	love.graphics.setFont(font)
 
+	-- generate all the background noise images
+	backgrounds = {}
+	canvas = love.graphics.newCanvas(love.graphics.getWidth(), love.graphics.getHeight())
+	love.graphics.setCanvas(canvas)
+	for i=1,10 do
+		canvas:clear()
+		for x=1, canvas:getWidth() do
+			for y=1, canvas:getHeight() do
+				color_pick = math.random(2)
+				if color_pick == 1 then
+					love.graphics.setColor(211, 211, 211, 255)
+				else
+					love.graphics.setColor(190, 190, 190, 255)
+				end
+				love.graphics.point(x, y)
+			end
+		end
+		table.insert(backgrounds, love.graphics.newImage(canvas:getImageData()))
+	end
+	love.graphics.setCanvas()
+
 	lines = {}
 	for line in love.filesystem.lines("poem.txt") do
 		table.insert(lines, line)
 	end
 
+	background = 1
 	line = 1
 	speed = 200
 	text_speed = 200
+	score = 0
 	game_over = false
 end
 
 function love.update(dt)
 	snow_system:update(dt)
 	animation:update(dt)
+
+	score = score + dt
+	print(score)
+
+	background = (background % #backgrounds) + 1
 
 	text_x = text_x - speed * dt
 
@@ -68,17 +96,8 @@ end
 
 
 function love.draw()
-	for x=1,love.graphics.getWidth() do
-		for y=1, love.graphics.getHeight() do
-			color_pick = math.random(2)
-			if color_pick == 1 then
-				love.graphics.setColor(211, 211, 211)
-			else
-				love.graphics.setColor(190, 190, 190)
-			end
-			love.graphics.point(x, y)
-		end
-	end
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.draw(backgrounds[background])
 
 	if game_over then
 		love.graphics.setColor(100, 100, 100, 255)
@@ -121,4 +140,5 @@ function reset()
 	text_y = math.random(love.graphics.getHeight())
 	line = 1
 	game_over = false
+	score = 0
 end
