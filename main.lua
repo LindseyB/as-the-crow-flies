@@ -23,11 +23,28 @@ function love.load()
 	animation:set_animation(true)
 	animation_x = (love.graphics.getWidth() - animation.width)/2
 	animation_y = (love.graphics.getHeight() - animation.height)/2
+
+	font = love.graphics.newFont("AmaticSC-Regular.ttf", 60)
+	love.graphics.setFont(font)
+
+	lines = {}
+	for line in love.filesystem.lines("poem.txt") do
+		table.insert(lines, line)
+	end
+
+	line = 1
+	delay = 0
 end
 
 function love.update(dt)
+	delay = delay + dt
 	snow_system:update(dt)
 	animation:update(dt)
+
+	if delay >= 3 then
+		line = (line % #lines) + 1
+		delay = 0
+	end
 end
 
 
@@ -48,8 +65,13 @@ function love.draw()
 
 	animation:draw(animation_x, animation_y)
 
+	love.graphics.setColor(100, 100, 100, 255-(delay*80))
+
+	love.graphics.printf(lines[line], 0, 100, love.graphics.getWidth(), "center")
+
 	love.graphics.setColor(255, 255, 255)
 
 	love.graphics.draw(snow_system)
+
 
 end
