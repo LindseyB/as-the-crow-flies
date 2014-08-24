@@ -55,6 +55,10 @@ function love.load()
 		table.insert(lines, line)
 	end
 
+	music = love.audio.newSource("0101GhostsI.mp3")
+	music:setLooping(true)
+	music:play()
+
 	background = 1
 	line = 1
 	speed = 200
@@ -89,8 +93,10 @@ function love.update(dt)
 	if colliding_check(animation_x, animation_y, animation.width, animation.height,
 		text_x, text_y, font:getWidth(lines[line]), font:getHeight()) then
 		game_over = true
+		music:setPitch(0.5)
 	elseif animation_y >= love.graphics.getHeight() or animation_y <= -(animation.height) then
 		game_over = true
+		music:setPitch(0.5)
 	end
 end
 
@@ -137,6 +143,7 @@ function colliding_check(x1,y1,w1,h1,x2,y2,w2,h2)
 end
 
 function reset()
+	music:setPitch(1)
 	animation_x = (love.graphics.getWidth() - animation.width)/2
 	animation_y = (love.graphics.getHeight() - animation.height)/2
 	text_x = love.graphics.getWidth()
