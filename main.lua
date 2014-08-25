@@ -52,7 +52,9 @@ function love.load()
 
 	lines = {}
 	for line in love.filesystem.lines("poem.txt") do
-		table.insert(lines, line)
+		if line ~= "" then
+			table.insert(lines, line)
+		end
 	end
 
 	music = love.audio.newSource("0101GhostsI.mp3")
