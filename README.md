@@ -1,7 +1,7 @@
 as-the-crow-flies
 =================
 
-to play download [love2d](http://love2d.org/) and as-the-crow-flies.love and you should be able to just run the .love file
+to play download [love2d](http://love2d.org/) and as-the-crow-flies.love (which is now in a zip in the releases) and you should be able to just run the .love file
 
 poem is by Sylvia Plath
 
