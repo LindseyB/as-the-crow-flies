@@ -1,4 +1,6 @@
 require "animated_sprite"
+require "bounding_box"
+
 
 function love.load()
 	love.window.setTitle("As The Crow Flies")
@@ -18,11 +20,24 @@ function love.load()
 	snow_system:setColors(255,255,255,200)
 	snow_system:start()
 
-	animation = AnimatedSprite:create("crow_sprite.png", 139, 200, 9, 1)
+	bounding_boxes = {
+		{x = 5, y = 5, w = 127, h = 126},
+		{x = 5, y = 5, w = 125, h = 125},
+		{x = 5, y = 25, w = 128, h = 102},
+		{x = 5, y = 90, w = 133, h = 48},
+		{x = 3, y = 94, w = 135, h = 78},
+		{x = 3, y = 88, w = 130, h = 100},
+		{x = 5, y = 90, w = 128, h = 84},
+		{x = 5, y = 60, w = 130, h = 75},
+		{x = 7, y = 47, w = 125, h = 86}
+	}
+
+	animation = AnimatedSprite:create("crow_sprite.png", 139, 200, 9, 1, bounding_boxes)
 	animation:load()
 	animation:set_animation(true)
 	animation_x = (love.graphics.getWidth() - animation.width)/2
 	animation_y = (love.graphics.getHeight() - animation.height)/2
+
 	text_x = love.graphics.getWidth()
 	text_y = math.random(love.graphics.getHeight())
 
@@ -92,7 +107,8 @@ function love.update(dt)
 		animation_y = animation_y + speed * dt
 	end
 
-	if colliding_check(animation_x, animation_y, animation.width, animation.height,
+	bb = animation:getBoundingBox(animation_x, animation_y)
+	if colliding_check(bb.x, bb.y, bb.width, bb.height,
 		text_x, text_y, font:getWidth(lines[line]), font:getHeight()) then
 		game_over = true
 		music:setPitch(0.5)

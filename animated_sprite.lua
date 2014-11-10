@@ -1,7 +1,9 @@
+require "bounding_box"
+
 AnimatedSprite = {}
 AnimatedSprite.__index = AnimatedSprite
 
-function AnimatedSprite:create(file, width, height, frames, animations)
+function AnimatedSprite:create(file, width, height, frames, animations, bounding_boxes)
 	local object = {}
 
 	setmetatable(object, AnimatedSprite)
@@ -23,6 +25,11 @@ function AnimatedSprite:create(file, width, height, frames, animations)
 		["Right"] = 1,
 		["Up"] = 1
 	}
+	object.bounding_boxes = {}
+
+	for i,bb in pairs(bounding_boxes) do
+		table.insert(object.bounding_boxes, BoundingBox:create(bb["x"], bb["y"], bb["w"], bb["h"]))
+	end
 
 	return object
 end
@@ -71,4 +78,9 @@ end
 function AnimatedSprite:set_animation_direction(direction)
 	self.animating = true
 	self.current_animation = direction
+end
+
+function AnimatedSprite:getBoundingBox(x, y)
+	self.bounding_boxes[self.current_frame]:position_adjusted(x, y)
+	return self.bounding_boxes[self.current_frame]
 end
