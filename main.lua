@@ -20,19 +20,7 @@ function love.load()
 	snow_system:setColors(255,255,255,200)
 	snow_system:start()
 
-	bounding_boxes = {
-		{x = 5, y = 5, w = 127, h = 126},
-		{x = 5, y = 5, w = 125, h = 125},
-		{x = 5, y = 25, w = 128, h = 102},
-		{x = 5, y = 90, w = 133, h = 48},
-		{x = 3, y = 94, w = 135, h = 78},
-		{x = 3, y = 88, w = 130, h = 100},
-		{x = 5, y = 90, w = 128, h = 84},
-		{x = 5, y = 60, w = 130, h = 75},
-		{x = 7, y = 47, w = 125, h = 86}
-	}
-
-	animation = AnimatedSprite:create("crow_sprite.png", 139, 200, 9, 1, bounding_boxes)
+	animation = AnimatedSprite:create("crow_sprite.png", 139, 200, 9, 1)
 	animation:load()
 	animation:set_animation(true)
 	animation_x = (love.graphics.getWidth() - animation.width)/2
@@ -92,10 +80,13 @@ function love.update(dt)
 
 	if game_over then return end
 
-	text_x = text_x - speed * dt
+	text_x = text_x - text_speed * dt
 
 	if text_x <= -(font:getWidth(lines[line])) then
 		score = score + 1
+
+		if line == #lines then text_speed = text_speed + 50 end
+
 		line = (line % #lines) + 1
 		text_x = love.graphics.getWidth()
 		text_y = math.random(love.graphics.getHeight()-font:getHeight())
@@ -167,6 +158,7 @@ function reset()
 	text_x = love.graphics.getWidth()
 	text_y = math.random(love.graphics.getHeight())
 	line = 1
+	text_speed = 200
 	game_over = false
 	score = 0
 end

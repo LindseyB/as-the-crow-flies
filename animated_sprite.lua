@@ -3,7 +3,7 @@ require "bounding_box"
 AnimatedSprite = {}
 AnimatedSprite.__index = AnimatedSprite
 
-function AnimatedSprite:create(file, width, height, frames, animations, bounding_boxes)
+function AnimatedSprite:create(file, width, height, frames, animations)
 	local object = {}
 
 	setmetatable(object, AnimatedSprite)
@@ -27,19 +27,16 @@ function AnimatedSprite:create(file, width, height, frames, animations, bounding
 	}
 	object.bounding_boxes = {}
 
-	for i,bb in pairs(bounding_boxes) do
-		table.insert(object.bounding_boxes, BoundingBox:create(bb["x"], bb["y"], bb["w"], bb["h"]))
-	end
-
 	return object
 end
 
 function AnimatedSprite:load()
-	-- read in the walk animation
+	imageData = self.sprite_sheet:getData()
 
 	for i = 1, self.animations do
 		local h = self.height * (i-1)
 		self.sprites[i] = {}
+		self.bounding_boxes[i] = {}
 		for j = 1, self.frames do
 			local w = self.width * (j-1)
 			self.sprites[i][j] = love.graphics.newQuad(	w,
@@ -48,6 +45,27 @@ function AnimatedSprite:load()
 														self.height,
 														self.sprite_sheet:getWidth(),
 														self.sprite_sheet:getHeight())
+
+			-- calculate the bounding boxes from alpha sprites
+			min_x = self.sprite_sheet:getWidth()
+			min_y = self.sprite_sheet:getHeight()
+			max_x = 0
+			max_y = 0
+			for y = h, (self.height + h - 1) do
+				for x = w, (self.width + w - 1) do
+					r, g, b, a = imageData:getPixel(x,y)
+					if a ~= 0 then
+						if x < min_x then min_x = x end
+						if x > max_x then max_x = x end
+						if y < min_y then min_y = y end
+						if y > max_y then max_y = y end
+					end
+				end
+			end
+			self.bounding_boxes[i][j] = BoundingBox:create( min_x-(self.width*(j-1)),
+				                                            min_y,
+				                                            max_x-(self.width*(j-1)),
+				                                            max_y-min_y)
 		end
 	end
 end
@@ -81,6 +99,6 @@ function AnimatedSprite:set_animation_direction(direction)
 end
 
 function AnimatedSprite:getBoundingBox(x, y)
-	self.bounding_boxes[self.current_frame]:position_adjusted(x, y)
-	return self.bounding_boxes[self.current_frame]
+	self.bounding_boxes[self.current_animation][self.current_frame]:position_adjusted(x, y)
+	return self.bounding_boxes[self.current_animation][self.current_frame]
 end
