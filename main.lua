@@ -4,7 +4,7 @@ require "bounding_box"
 
 function love.load()
 	love.window.setTitle("As The Crow Flies")
-	particle = love.graphics.newImage("snow.png")
+	particle = love.graphics.newImage("assets/sprites/snow.png")
 
 	snow_system = love.graphics.newParticleSystem(particle, 1000)
 
@@ -20,7 +20,7 @@ function love.load()
 	snow_system:setColors(255,255,255,200)
 	snow_system:start()
 
-	animation = AnimatedSprite:create("crow_sprite.png", 139, 200, 9, 1)
+	animation = AnimatedSprite:create("assets/sprites/crow_sprite.png", 139, 200, 9, 1)
 	animation:load()
 	animation:set_animation(true)
 	animation_x = (love.graphics.getWidth() - animation.width)/2
@@ -29,7 +29,7 @@ function love.load()
 	text_x = love.graphics.getWidth()
 	text_y = math.random(love.graphics.getHeight())
 
-	font = love.graphics.newFont("AmaticSC-Regular.ttf", 80)
+	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
 	love.graphics.setFont(font)
 
 	-- generate all the background noise images
@@ -54,13 +54,13 @@ function love.load()
 	love.graphics.setCanvas()
 
 	lines = {}
-	for line in love.filesystem.lines("poem.txt") do
+	for line in love.filesystem.lines("assets/poem.txt") do
 		if line ~= "" then
 			table.insert(lines, line)
 		end
 	end
 
-	music = love.audio.newSource("0101GhostsI.mp3")
+	music = love.audio.newSource("assets/music/0101GhostsI.mp3")
 	music:setLooping(true)
 	music:play()
 
