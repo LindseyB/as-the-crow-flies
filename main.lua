@@ -30,9 +30,6 @@ function love.load()
 	text_x = love.graphics.getWidth()
 	text_y = math.random(love.graphics.getHeight())
 
-	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
-	love.graphics.setFont(font)
-
 	main_menu = MainMenu:create()
 
 	-- generate all the background noise images
@@ -83,7 +80,11 @@ function love.update(dt)
 
 	background = (background % #backgrounds) + 1
 
-	if show_menu then return end
+	if show_menu then
+		main_menu:hover_state(love.mouse.getX(), love.mouse.getY())
+		return
+	end
+
 	if game_over then return end
 
 	text_x = text_x - text_speed * dt
@@ -148,6 +149,18 @@ function love.keypressed(key, isrepeat)
 		love.event.quit()
 	elseif game_over and key == " " then
 		reset()
+	end
+end
+
+function love.mousepressed(x, y, button)
+	if show_menu and button == "l" then
+		clicked = main_menu:click(x,y)
+
+		if clicked == main_menu.Buttons.Play then
+			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
+			love.graphics.setFont(font)
+			show_menu = false
+		end
 	end
 end
 
