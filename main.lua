@@ -1,5 +1,6 @@
 require "animated_sprite"
 require "bounding_box"
+require "main_menu"
 
 
 function love.load()
@@ -31,6 +32,8 @@ function love.load()
 
 	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
 	love.graphics.setFont(font)
+
+	main_menu = MainMenu:create()
 
 	-- generate all the background noise images
 	backgrounds = {}
@@ -64,12 +67,14 @@ function love.load()
 	music:setLooping(true)
 	music:play()
 
+
 	background = 1
 	line = 1
 	speed = 200
 	text_speed = 200
 	score = 0
 	game_over = false
+	show_menu = true
 end
 
 function love.update(dt)
@@ -78,6 +83,7 @@ function love.update(dt)
 
 	background = (background % #backgrounds) + 1
 
+	if show_menu then return end
 	if game_over then return end
 
 	text_x = text_x - text_speed * dt
@@ -114,7 +120,9 @@ function love.draw()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.draw(backgrounds[background])
 
-	if game_over then
+	if show_menu then
+		main_menu:draw()
+	elseif game_over then
 		love.graphics.setColor(100, 100, 100, 255)
 		love.graphics.printf("Game Over - Press Space\nYour Score Was: " .. score, 0, 100, love.graphics.getWidth(), "center")
 	else
