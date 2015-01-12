@@ -1,7 +1,10 @@
 function loader()
 	love.window.setTitle("As The Crow Flies")
 	love.window.setIcon(love.image.newImageData("assets/icon/icon.png"))
-	love.window.setMode(1440, 900, {fullscreen=true})
+
+	modes = love.window.getFullscreenModes()
+	table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
+	love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
 
 	load_snow()
 	load_animation()
