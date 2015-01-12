@@ -5,6 +5,7 @@ function loader()
 	modes = love.window.getFullscreenModes()
 	table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
 	love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
+	scale = love.graphics.getHeight()/600
 
 	load_snow()
 	load_animation()
@@ -45,7 +46,6 @@ function load_snow()
 end
 
 function load_animation()
-	scale = love.graphics.getHeight()/600
 	animation = AnimatedSprite:create("assets/sprites/crow_sprite.png", 139, 200, 9, 1, scale)
 	animation:load()
 	animation:set_animation(true)

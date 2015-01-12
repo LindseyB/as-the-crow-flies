@@ -33,11 +33,11 @@ function love.mousepressed(x, y, button)
 		clicked = main_menu:click(x,y)
 
 		if clicked == main_menu.Buttons.Play then
-			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
+			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 			love.graphics.setFont(font)
 			show_menu = false
 		elseif clicked == main_menu.Buttons.Credits then
-			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
+			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 			love.graphics.setFont(font)
 			load_credits()
 			show_menu = false

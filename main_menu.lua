@@ -7,18 +7,18 @@ function MainMenu:create()
 	local object = {}
 	setmetatable(object, MainMenu)
 
-	object.button_font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 40)
-	object.title_font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
+	object.button_font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 40*scale)
+	object.title_font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 
 	padding = 20
 
-	x = love.graphics.getWidth()/2 - 100
+	x = love.graphics.getWidth()/2 - ((200/2)*scale)
 
 	object.button_list = {
-		Button:create("Play", x, 250, 200, object.button_font:getHeight()),
-		Button:create("Highscores", x, 250+object.button_font:getHeight()+padding, 200, object.button_font:getHeight()),
-		Button:create("Credits", x, 250+((object.button_font:getHeight()+padding)*2), 200, object.button_font:getHeight()),
-		Button:create("Exit", x, 250+((object.button_font:getHeight()+padding)*3), 200, object.button_font:getHeight())
+		Button:create("Play", x, 250, 200*scale, object.button_font:getHeight()),
+		Button:create("Highscores", x, 250+object.button_font:getHeight()+padding, 200*scale, object.button_font:getHeight()),
+		Button:create("Credits", x, 250+((object.button_font:getHeight()+padding)*2), 200*scale, object.button_font:getHeight()),
+		Button:create("Exit", x, 250+((object.button_font:getHeight()+padding)*3), 200*scale, object.button_font:getHeight())
 	}
 
 	object.Buttons = {
