@@ -1,6 +1,7 @@
 function loader()
 	love.window.setTitle("As The Crow Flies")
 	love.window.setIcon(love.image.newImageData("assets/icon/icon.png"))
+	love.window.setMode(1440, 900, {fullscreen=true})
 
 	load_snow()
 	load_animation()
@@ -25,7 +26,7 @@ end
 
 function load_snow()
 	particle = love.graphics.newImage("assets/sprites/snow.png")
-	snow_system = love.graphics.newParticleSystem(particle, 1000)
+	snow_system = love.graphics.newParticleSystem(particle, 2000)
 
 	snow_system:setEmissionRate(100)
 	snow_system:setSpeed(1,3)
@@ -33,9 +34,9 @@ function load_snow()
 	snow_system:setSizes(0.5,0.4,0.3)
 	snow_system:setPosition(400,0)
 	snow_system:setEmitterLifetime(-1)
-	snow_system:setParticleLifetime(3,5.5)
+	snow_system:setParticleLifetime(10, 20, 30)
 	snow_system:setDirection(.45)
-	snow_system:setAreaSpread("normal",300,0)
+	snow_system:setAreaSpread("normal",love.graphics.getWidth(),0)
 	snow_system:setColors(255,255,255,200)
 	snow_system:start()
 end
