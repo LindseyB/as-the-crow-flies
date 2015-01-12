@@ -4,7 +4,7 @@ function loader()
 
 	modes = love.window.getFullscreenModes()
 	table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
-	love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
+	--love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
 	scale = love.graphics.getHeight()/600
 
 	highscore.set("highscores", 8, "AAA", 100)
@@ -28,10 +28,6 @@ function loader()
 	speed = 200
 	text_speed = 200
 	score = 0
-	game_over = false
-	show_menu = true
-	show_credits = false
-	show_highscore = false
 
 	Buttons = {
 		["Play"] = 1,
@@ -40,6 +36,16 @@ function loader()
 		["Exit"] = 4,
 		["Menu"] = 5
 	}
+
+	States = {
+		["Play"] = 1,
+		["Highscores"] = 2,
+		["Credits"] = 3,
+		["Menu"] = 4,
+		["GameOver"] = 5
+	}
+
+	state = States.Menu
 end
 
 function load_snow()

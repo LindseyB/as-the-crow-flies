@@ -2,11 +2,11 @@ function drawer()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.draw(backgrounds[background])
 
-	if show_menu then
+	if state == States.Menu then
 		main_menu:draw()
-	elseif game_over then
+	elseif state == States.GameOver then
 		game_over_draw()
-	elseif show_highscore then
+	elseif state == States.Highscores then
 		highscore_table:draw()
 	else
 		game_draw()
@@ -23,7 +23,7 @@ end
 function game_draw()
 	love.graphics.setFont(font)
 	-- score
-	if not show_credits then love.graphics.print(score, 10, 10) end
+	if state == States.Play then love.graphics.print(score, 10, 10) end
 
 	-- crow
 	love.graphics.setColor(255, 255, 255, 130)

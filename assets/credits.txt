@@ -1,6 +1,5 @@
 Credits
 
 Game Design & Programming: Lindsey Bieda
-Raven graphic: Jessie Mollodovsky
-
+Crow graphic: Jessie Mollodovsky
 Music:  bzur (cc-by)

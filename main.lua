@@ -26,29 +26,28 @@ function love.keypressed(key, isrepeat)
 	if key == "escape" then
 		highscore.save()
 		love.event.quit()
-	elseif game_over and key == " " then
+	elseif state == States.GameOver and key == " " then
 		reset()
+		state = States.Play
 	end
 end
 
 function love.mousepressed(x, y, button)
-	if (show_menu or show_highscore) and button == "l" then
-		if show_menu then clicked = main_menu:click(x,y) end
-		if show_highscore then clicked = highscore_table:click(x,y) end
+	if (state == States.Menu or state == States.Highscores) and button == "l" then
+		if state == States.Menu then clicked = main_menu:click(x,y) end
+		if state == States.Highscores then clicked = highscore_table:click(x,y) end
 
 
 		if clicked == Buttons.Play then
-			show_menu = false
+			load_poem()
+			state = States.Play
 		elseif clicked == Buttons.Credits then
 			load_credits()
-			show_menu = false
-			show_credits = true
+			state = States.Credits
 		elseif clicked == Buttons.Highscores then
-			show_menu = false
-			show_highscore = true
+			state = States.Highscores
 		elseif clicked == Buttons.Menu then
-			show_highscore = false
-			show_menu = true
+			state = States.Menu
 		elseif clicked == Buttons.Exit then
 			highscore.save()
 			love.event.quit()

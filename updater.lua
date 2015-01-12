@@ -3,30 +3,32 @@ function updater(dt)
 
 	background = (background % #backgrounds) + 1
 
-	if game_over then return end
+	if state == States.GameOver then return end
 
-	if show_highscore then
+	if state == States.Highscores then
 		highscore_table:hover_state(love.mouse.getX(), love.mouse.getY())
 		return
 	end
 
-	if show_menu then
+	if state == States.Menu then
 		main_menu:hover_state(love.mouse.getX(), love.mouse.getY())
 		return
 	end
 
 	text_update(dt)
 	animation_update(dt)
-	if not show_credits then collision_update(dt) end
+
+	if state == States.Play then collision_update(dt) end
 end
 
 function text_update(dt)
 	text_x = text_x - text_speed * dt
 
-	if line == #lines and show_credits then
-		show_credits = false
-		show_menu = true
-		score = 0
+	if state == States.Credits and text_x <= -(font:getWidth(lines[line])) then
+		if line == #lines then
+			state = States.Menu
+			score = 0
+		end
 	end
 
 	if text_x <= -(font:getWidth(lines[line])) then
@@ -43,9 +45,9 @@ end
 function animation_update(dt)
 	animation:update(dt)
 	if love.keyboard.isDown(" ") then
-		animation_y = animation_y - speed * dt
+		animation_y = animation_y - speed * dt * scale
 	else
-		animation_y = animation_y + speed * dt
+		animation_y = animation_y + speed * dt * scale
 	end
 end
 
@@ -53,10 +55,10 @@ function collision_update()
 	bb = animation:getBoundingBox(animation_x, animation_y)
 	if colliding_check(bb.x, bb.y, bb.width, bb.height,
 		text_x, text_y, font:getWidth(lines[line]), font:getHeight()) then
-		game_over = true
+		state = States.GameOver
 		music:setPitch(0.5)
 	elseif animation_y >= love.graphics.getHeight() or animation_y <= -(animation.height) then
-		game_over = true
+		state = States.GameOver
 		music:setPitch(0.5)
 	end
 end
