@@ -1,6 +1,6 @@
 function loader()
 	love.window.setTitle("As The Crow Flies")
-	particle = love.graphics.newImage("assets/sprites/snow.png")
+	love.window.setIcon(love.image.newImageData("assets/icon/icon.png"))
 
 	load_snow()
 	load_animation()
@@ -23,6 +23,7 @@ function loader()
 end
 
 function load_snow()
+	particle = love.graphics.newImage("assets/sprites/snow.png")
 	snow_system = love.graphics.newParticleSystem(particle, 1000)
 
 	snow_system:setEmissionRate(100)
