@@ -72,7 +72,14 @@ end
 
 function load_poem()
 	lines = {}
-	for line in love.filesystem.lines("assets/poem.txt") do
+
+	file = "assets/poems/admonition.txt"
+
+	if os.date("%B") == "January" and os.date("%d") == 19 then
+		file = "assets/poems/secret.txt"
+	end
+
+	for line in love.filesystem.lines(file) do
 		if line ~= "" then
 			table.insert(lines, line)
 		end
