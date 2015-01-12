@@ -45,7 +45,8 @@ function load_snow()
 end
 
 function load_animation()
-	animation = AnimatedSprite:create("assets/sprites/crow_sprite.png", 139, 200, 9, 1)
+	scale = love.graphics.getHeight()/600
+	animation = AnimatedSprite:create("assets/sprites/crow_sprite.png", 139, 200, 9, 1, scale)
 	animation:load()
 	animation:set_animation(true)
 	animation_x = (love.graphics.getWidth() - animation.width)/2

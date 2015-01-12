@@ -3,7 +3,7 @@ require "bounding_box"
 AnimatedSprite = {}
 AnimatedSprite.__index = AnimatedSprite
 
-function AnimatedSprite:create(file, width, height, frames, animations)
+function AnimatedSprite:create(file, width, height, frames, animations, scale)
 	local object = {}
 
 	setmetatable(object, AnimatedSprite)
@@ -19,6 +19,7 @@ function AnimatedSprite:create(file, width, height, frames, animations)
 	object.delay = 0.08
 	object.delta = 0
 	object.animating = false
+	object.scale = scale
 	object.Directions = {
 		["Down"] = 1,
 		["Left"] = 2,
@@ -60,7 +61,7 @@ function AnimatedSprite:update(dt)
 end
 
 function AnimatedSprite:draw(x, y)
-	love.graphics.draw(self.sprite_sheet, self.sprites[self.current_animation][self.current_frame], x, y, 0, 1, 1)
+	love.graphics.draw(self.sprite_sheet, self.sprites[self.current_animation][self.current_frame], x, y, 0, self.scale, self.scale)
 end
 
 function AnimatedSprite:set_animation(animating)
