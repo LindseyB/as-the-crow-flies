@@ -102,7 +102,7 @@ function load_credits()
 end
 
 function load_music()
-	music = love.audio.newSource("assets/music/0101GhostsI.mp3")
+	music = love.audio.newSource("assets/music/L'ultima pioggia (last rain).mp3")
 	music:setLooping(true)
 	music:play()
 end
