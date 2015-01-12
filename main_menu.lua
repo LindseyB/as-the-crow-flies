@@ -26,7 +26,7 @@ end
 
 function MainMenu:draw()
 	love.graphics.setFont(self.title_font)
-	love.graphics.printf("As The Crow Flies", 0, (100*scale), love.graphics.getWidth(), "center")
+	love.graphics.printf("As The Crow Flies", 0, (50*scale), love.graphics.getWidth(), "center")
 	love.graphics.setFont(self.button_font)
 
 	for i, button in ipairs(self.button_list) do

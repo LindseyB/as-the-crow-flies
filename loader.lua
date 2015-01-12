@@ -4,7 +4,7 @@ function loader()
 
 	modes = love.window.getFullscreenModes()
 	table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
-	-- love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
+	love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
 	scale = love.graphics.getHeight()/600
 
 	highscore.set("highscores", 8, "AAA", 100)
