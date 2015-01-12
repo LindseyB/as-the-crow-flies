@@ -20,6 +20,7 @@ function loader()
 	score = 0
 	game_over = false
 	show_menu = true
+	show_credits = false
 end
 
 function load_snow()
@@ -80,6 +81,16 @@ function load_poem()
 	end
 
 	for line in love.filesystem.lines(file) do
+		if line ~= "" then
+			table.insert(lines, line)
+		end
+	end
+end
+
+function load_credits()
+	lines = {}
+
+	for line in love.filesystem.lines("assets/credits.txt") do
 		if line ~= "" then
 			table.insert(lines, line)
 		end

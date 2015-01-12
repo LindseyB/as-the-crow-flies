@@ -12,11 +12,17 @@ function updater(dt)
 
 	text_update(dt)
 	animation_update(dt)
-	collision_update(dt)
+	if not show_credits then collision_update(dt) end
 end
 
 function text_update(dt)
 	text_x = text_x - text_speed * dt
+
+	if line == #lines and show_credits then
+		show_credits = false
+		show_menu = true
+		score = 0
+	end
 
 	if text_x <= -(font:getWidth(lines[line])) then
 		score = score + 1

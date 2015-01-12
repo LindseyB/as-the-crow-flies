@@ -20,7 +20,7 @@ end
 
 function game_draw()
 	-- score
-	love.graphics.print(score, 10, 10)
+	if not show_credits then love.graphics.print(score, 10, 10) end
 
 	-- crow
 	love.graphics.setColor(255, 255, 255, 130)

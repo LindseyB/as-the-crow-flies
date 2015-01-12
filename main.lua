@@ -36,6 +36,12 @@ function love.mousepressed(x, y, button)
 			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
 			love.graphics.setFont(font)
 			show_menu = false
+		elseif clicked == main_menu.Buttons.Credits then
+			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80)
+			love.graphics.setFont(font)
+			load_credits()
+			show_menu = false
+			show_credits = true
 		elseif clicked == main_menu.Buttons.Exit then
 			love.event.quit()
 		end
