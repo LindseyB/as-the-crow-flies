@@ -21,19 +21,12 @@ function MainMenu:create()
 		Button:create("Exit", x, 250+((object.button_font:getHeight()+padding)*3), 200*scale, object.button_font:getHeight())
 	}
 
-	object.Buttons = {
-		["Play"] = 1,
-		["Highscores"] = 2,
-		["Credits"] = 3,
-		["Exit"] = 4
-	}
-
 	return object
 end
 
 function MainMenu:draw()
 	love.graphics.setFont(self.title_font)
-	love.graphics.printf("As The Crow Flies", 0, 100, love.graphics.getWidth(), "center")
+	love.graphics.printf("As The Crow Flies", 0, (100*scale), love.graphics.getWidth(), "center")
 	love.graphics.setFont(self.button_font)
 
 	for i, button in ipairs(self.button_list) do

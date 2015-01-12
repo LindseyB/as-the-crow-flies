@@ -4,8 +4,12 @@ function loader()
 
 	modes = love.window.getFullscreenModes()
 	table.sort(modes, function(a, b) return a.width*a.height > b.width*b.height end)
-	love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
+	-- love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
 	scale = love.graphics.getHeight()/600
+
+	highscore.set("highscores", 8, "AAA", 100)
+
+	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 
 	load_snow()
 	load_animation()
@@ -17,6 +21,7 @@ function loader()
 	text_y = math.random(love.graphics.getHeight())
 
 	main_menu = MainMenu:create()
+	highscore_table = HighscoreTable:create()
 
 	background = 1
 	line = 1
@@ -26,6 +31,15 @@ function loader()
 	game_over = false
 	show_menu = true
 	show_credits = false
+	show_highscore = false
+
+	Buttons = {
+		["Play"] = 1,
+		["Highscores"] = 2,
+		["Credits"] = 3,
+		["Exit"] = 4,
+		["Menu"] = 5
+	}
 end
 
 function load_snow()
@@ -93,6 +107,8 @@ function load_poem()
 end
 
 function load_credits()
+	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
+	love.graphics.setFont(font)
 	lines = {}
 
 	for line in love.filesystem.lines("assets/credits.txt") do

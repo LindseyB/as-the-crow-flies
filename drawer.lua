@@ -6,6 +6,8 @@ function drawer()
 		main_menu:draw()
 	elseif game_over then
 		game_over_draw()
+	elseif show_highscore then
+		highscore_table:draw()
 	else
 		game_draw()
 	end
@@ -19,6 +21,7 @@ function game_over_draw()
 end
 
 function game_draw()
+	love.graphics.setFont(font)
 	-- score
 	if not show_credits then love.graphics.print(score, 10, 10) end
 

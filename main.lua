@@ -5,6 +5,8 @@ require "collision"
 require "loader"
 require "updater"
 require "drawer"
+require "sick"
+require "highscore_table"
 
 
 function love.load()
@@ -22,6 +24,7 @@ end
 
 function love.keypressed(key, isrepeat)
 	if key == "escape" then
+		highscore.save()
 		love.event.quit()
 	elseif game_over and key == " " then
 		reset()
@@ -29,20 +32,25 @@ function love.keypressed(key, isrepeat)
 end
 
 function love.mousepressed(x, y, button)
-	if show_menu and button == "l" then
-		clicked = main_menu:click(x,y)
+	if (show_menu or show_highscore) and button == "l" then
+		if show_menu then clicked = main_menu:click(x,y) end
+		if show_highscore then clicked = highscore_table:click(x,y) end
 
-		if clicked == main_menu.Buttons.Play then
-			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
-			love.graphics.setFont(font)
+
+		if clicked == Buttons.Play then
 			show_menu = false
-		elseif clicked == main_menu.Buttons.Credits then
-			font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
-			love.graphics.setFont(font)
+		elseif clicked == Buttons.Credits then
 			load_credits()
 			show_menu = false
 			show_credits = true
-		elseif clicked == main_menu.Buttons.Exit then
+		elseif clicked == Buttons.Highscores then
+			show_menu = false
+			show_highscore = true
+		elseif clicked == Buttons.Menu then
+			show_highscore = false
+			show_menu = true
+		elseif clicked == Buttons.Exit then
+			highscore.save()
 			love.event.quit()
 		end
 	end

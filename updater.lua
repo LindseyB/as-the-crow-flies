@@ -5,6 +5,11 @@ function updater(dt)
 
 	if game_over then return end
 
+	if show_highscore then
+		highscore_table:hover_state(love.mouse.getX(), love.mouse.getY())
+		return
+	end
+
 	if show_menu then
 		main_menu:hover_state(love.mouse.getX(), love.mouse.getY())
 		return
