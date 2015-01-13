@@ -37,12 +37,11 @@ function text_update(dt)
 	if state == States.Credits and text_x <= -(font:getWidth(lines[line])) then
 		if line == #lines then
 			state = States.Menu
-			score = 0
 		end
 	end
 
 	if text_x <= -(font:getWidth(lines[line])) then
-		score = score + 1
+		if state = States.Play then score = score + 1 end
 
 		if line == #lines then text_speed = text_speed + 50 end
 
