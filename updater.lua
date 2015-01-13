@@ -41,7 +41,7 @@ function text_update(dt)
 	end
 
 	if text_x <= -(font:getWidth(lines[line])) then
-		if state = States.Play then score = score + 1 end
+		if state == States.Play then score = score + 1 end
 
 		if line == #lines then text_speed = text_speed + 50 end
 
