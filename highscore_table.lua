@@ -24,7 +24,7 @@ function HighscoreTable:draw()
 
 	love.graphics.setFont(self.button_font)
 	for i, score, name in highscore() do
-		love.graphics.printf(i .. ". " .. name .. " - " .. score, 0, (120*scale)+(i*self.button_font:getHeight()), love.graphics.getWidth(), "center")
+		love.graphics.printf(i .. ". " .. name .. " - " .. score, 0, 120+(i*self.button_font:getHeight()), love.graphics.getWidth(), "center")
 	end
 	self.button:draw()
 end
