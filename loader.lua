@@ -53,12 +53,12 @@ end
 
 function load_snow()
 	particle = love.graphics.newImage("assets/sprites/snow.png")
-	snow_system = love.graphics.newParticleSystem(particle, 2000)
+	snow_system = love.graphics.newParticleSystem(particle, 2000*scale)
 
-	snow_system:setEmissionRate(100)
+	snow_system:setEmissionRate(100*scale)
 	snow_system:setSpeed(1,3)
 	snow_system:setLinearAcceleration(-20, 50, 20, 100)
-	snow_system:setSizes(0.5,0.4,0.3)
+	snow_system:setSizes(0.5*scale,0.4*scale,0.3*scale)
 	snow_system:setPosition(400,0)
 	snow_system:setEmitterLifetime(-1)
 	snow_system:setParticleLifetime(10, 20, 30)
