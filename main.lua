@@ -28,6 +28,10 @@ function love.keypressed(key, isrepeat)
 	if key == "escape" then
 		highscore.save()
 		love.event.quit()
+	elseif state == States.Paused and key == " " then
+		state = States.Play
+	elseif state == States.Play and key == "p" then
+		state = States.Paused
 	elseif state == States.NameEntry and key == "backspace" then
 		name = name:sub(1, #name - 1)
 	end
@@ -49,7 +53,7 @@ function love.mousepressed(x, y, button)
 		if clicked == Buttons.Play then
 			reset()
 			load_poem()
-			state = States.Play
+			state = States.Paused
 		elseif clicked == Buttons.Credits then
 			load_credits()
 			state = States.Credits

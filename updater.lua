@@ -3,6 +3,8 @@ function updater(dt)
 
 	background = (background % #backgrounds) + 1
 
+	if state == States.Paused then return end
+
 	if state == States.Highscores then
 		highscore_table:hover_state(love.mouse.getX(), love.mouse.getY())
 		return

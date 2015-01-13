@@ -19,8 +19,12 @@ end
 
 function game_draw()
 	love.graphics.setFont(font)
+
 	-- score
 	if state == States.Play then love.graphics.print(score, 10, 10) end
+
+	-- paused
+	if state == States.Paused then love.graphics.printf("Push Space to Start", 0, love.graphics.getHeight()/2 - font:getHeight(), love.graphics.getWidth(), "center") end
 
 	-- crow
 	love.graphics.setColor(255, 255, 255, 130)

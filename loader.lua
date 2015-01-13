@@ -45,7 +45,8 @@ function loader()
 		["Credits"] = 3,
 		["Menu"] = 4,
 		["GameOver"] = 5,
-		["NameEntry"] = 6
+		["NameEntry"] = 6,
+		["Paused"] = 7
 	}
 
 	state = States.Menu
