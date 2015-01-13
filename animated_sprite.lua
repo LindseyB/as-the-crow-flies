@@ -26,7 +26,7 @@ function AnimatedSprite:create(file, width, height, frames, animations, scale)
 		["Right"] = 1,
 		["Up"] = 1
 	}
-	object.bounding_box = BoundingBox:create(0,93,width,25)
+	object.bounding_box = BoundingBox:create(0,93,width*scale,25*scale)
 
 	return object
 end

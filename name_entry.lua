@@ -14,12 +14,12 @@ function NameEntry:create()
 	padding = 20
 	x = love.graphics.getWidth()/2 - ((200/2)*scale)
 
-	object.submit = Button:create("Submit", x, 250, 200*scale, object.button_font:getHeight())
+	object.submit = Button:create("Submit", x, 400, 200*scale, object.button_font:getHeight())
 
 
 	object.button_list = {
-		Button:create("Play Again", x, 250, 200*scale, object.button_font:getHeight()),
-		Button:create("View Highscores", x, 250+object.button_font:getHeight()+padding, 200*scale, object.button_font:getHeight())
+		Button:create("Play Again", x, 300, 200*scale, object.button_font:getHeight()),
+		Button:create("View Highscores", x, 300+object.button_font:getHeight()+padding, 200*scale, object.button_font:getHeight())
 	}
 
 
@@ -28,8 +28,11 @@ end
 
 function NameEntry:draw()
 	love.graphics.setFont(self.title_font)
-	love.graphics.printf("Highscore " .. score, 0, (50*scale), love.graphics.getWidth(), "center")
-	love.graphics.printf("Enter Initials: " .. name, 0, (50+self.title_font:getHeight()*scale), love.graphics.getWidth(), "center")
+	love.graphics.printf("Highscore " .. score, 0, 50, love.graphics.getWidth(), "center")
+	if not self.submitted then
+		love.graphics.printf("Enter Initials: " .. name, 0, (60+self.title_font:getHeight()), love.graphics.getWidth(), "center")
+	end
+
 	love.graphics.setFont(self.button_font)
 
 	if self.submitted then
@@ -66,6 +69,7 @@ end
 
 function NameEntry:click(x, y)
 	if self.submitted then
+		self.submitted = false
 		for i, button in ipairs(self.button_list) do
 			if x >= button.x and x < button.x + button.width
 			and y >= button.y and y < button.y + button.height then
@@ -73,10 +77,13 @@ function NameEntry:click(x, y)
 			end
 		end
 	else
-		highscore.add(name, score)
-		highscore.save()
-		self.submitted = true
-		love.keyboard.setTextInput(false)
+		if x >= self.submit.x and x < self.submit.x + self.submit.width
+		and y >= self.submit.y and y < self.submit.y + self.submit.height then
+			highscore.add(name, score)
+			highscore.save()
+			self.submitted = true
+			love.keyboard.setTextInput(false)
+		end
 	end
 
 	return nil
