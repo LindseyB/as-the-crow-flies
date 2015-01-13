@@ -22,9 +22,10 @@ function HighscoreTable:draw()
 	love.graphics.setFont(self.title_font)
 	love.graphics.printf("As The Crow Flies Highscores", 0, (50*scale), love.graphics.getWidth(), "center")
 
+	y = self.title_font:getHeight() + (50*scale) + 10
 	love.graphics.setFont(self.button_font)
 	for i, score, name in highscore() do
-		love.graphics.printf(i .. ". " .. name .. " - " .. score, 0, 120+(i*self.button_font:getHeight()), love.graphics.getWidth(), "center")
+		love.graphics.printf(i .. ". " .. name .. " - " .. score, 0, y+((i-1)*self.button_font:getHeight()), love.graphics.getWidth(), "center")
 	end
 	self.button:draw()
 end
