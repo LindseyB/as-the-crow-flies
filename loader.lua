@@ -120,6 +120,7 @@ function load_credits()
 	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 	love.graphics.setFont(font)
 	lines = {}
+	line = 1
 
 	for line in love.filesystem.lines("assets/credits.txt") do
 		if line ~= "" then
