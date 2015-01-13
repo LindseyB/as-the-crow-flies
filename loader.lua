@@ -8,7 +8,7 @@ function loader()
 	scale = love.graphics.getHeight()/600
 
 	love.keyboard.setTextInput(false)
-	highscore.set("highscores", 8, "AAA", 3)
+	highscore.set("highscores", 8, "AAA", 5)
 
 	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 
@@ -28,6 +28,7 @@ function loader()
 
 	background = 1
 	speed = 200
+	text_speed = 200
 	name = ""
 
 	Buttons = {
