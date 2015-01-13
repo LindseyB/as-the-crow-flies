@@ -7,7 +7,8 @@ function loader()
 	--love.window.setMode(modes[1].width, modes[1].height, {fullscreen=true})
 	scale = love.graphics.getHeight()/600
 
-	highscore.set("highscores", 8, "AAA", 100)
+	love.keyboard.setTextInput(false)
+	highscore.set("highscores", 8, "AAA", 3)
 
 	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 
@@ -22,12 +23,11 @@ function loader()
 
 	main_menu = MainMenu:create()
 	highscore_table = HighscoreTable:create()
+	name_entry = NameEntry:create()
 
 	background = 1
-	line = 1
 	speed = 200
-	text_speed = 200
-	score = 0
+	name = ""
 
 	Buttons = {
 		["Play"] = 1,
@@ -42,7 +42,8 @@ function loader()
 		["Highscores"] = 2,
 		["Credits"] = 3,
 		["Menu"] = 4,
-		["GameOver"] = 5
+		["GameOver"] = 5,
+		["NameEntry"] = 6
 	}
 
 	state = States.Menu

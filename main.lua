@@ -7,6 +7,7 @@ require "updater"
 require "drawer"
 require "sick"
 require "highscore_table"
+require "name_entry"
 
 
 function love.load()
@@ -29,16 +30,26 @@ function love.keypressed(key, isrepeat)
 	elseif state == States.GameOver and key == " " then
 		reset()
 		state = States.Play
+	elseif state == States.NameEntry and key == "backspace" then
+		name = name:sub(1, #name - 1)
+	end
+end
+
+function love.textinput(t)
+	if string.len(name) < 3 then
+		name = name .. t
 	end
 end
 
 function love.mousepressed(x, y, button)
-	if (state == States.Menu or state == States.Highscores) and button == "l" then
+	if (state == States.Menu or state == States.Highscores or state == States.NameEntry) and button == "l" then
 		if state == States.Menu then clicked = main_menu:click(x,y) end
 		if state == States.Highscores then clicked = highscore_table:click(x,y) end
+		if state == States.NameEntry then clicked = name_entry:click(x,y) end
 
 
 		if clicked == Buttons.Play then
+			reset()
 			load_poem()
 			state = States.Play
 		elseif clicked == Buttons.Credits then
@@ -63,6 +74,5 @@ function reset()
 	text_y = math.random(love.graphics.getHeight())
 	line = 1
 	text_speed = 200
-	game_over = false
-	score = 0
+	score = 100
 end

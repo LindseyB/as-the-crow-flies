@@ -15,6 +15,12 @@ function updater(dt)
 		return
 	end
 
+	if state == States.NameEntry then
+		name_entry:hover_state(love.mouse.getX(), love.mouse.getY())
+		return
+	end
+
+
 	text_update(dt)
 	animation_update(dt)
 
@@ -55,9 +61,17 @@ function collision_update()
 	bb = animation:getBoundingBox(animation_x, animation_y)
 	if colliding_check(bb.x, bb.y, bb.width, bb.height,
 		text_x, text_y, font:getWidth(lines[line]), font:getHeight()) then
-		state = States.GameOver
-		music:setPitch(0.5)
+		process_gameover()
 	elseif animation_y >= love.graphics.getHeight() or animation_y <= -(animation.height) then
+		process_gameover()
+	end
+end
+
+function process_gameover()
+	if score > highscore.scores[8][1] then
+		love.keyboard.setTextInput(true)
+		state = States.NameEntry
+	else
 		state = States.GameOver
 		music:setPitch(0.5)
 	end

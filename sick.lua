@@ -29,7 +29,6 @@ local function sortScore(a, b)
 	return a[1] > b[1]
 end
 function h.add(name, score)
-print(#h.scores)
 	h.scores[#h.scores+1] = {score, name}
 	table.sort(h.scores, sortScore)
 end

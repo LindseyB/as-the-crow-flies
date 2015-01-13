@@ -8,6 +8,8 @@ function drawer()
 		game_over_draw()
 	elseif state == States.Highscores then
 		highscore_table:draw()
+	elseif state == States.NameEntry then
+		name_entry:draw()
 	else
 		game_draw()
 	end
