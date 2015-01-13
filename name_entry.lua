@@ -14,7 +14,7 @@ function NameEntry:create()
 	padding = 20
 	x = love.graphics.getWidth()/2 - ((200/2)*scale)
 
-	object.submit = Button:create("Submit", x, (object.title_font:getHeight()+padding)*2 + padding, 200*scale, object.button_font:getHeight())
+	object.submit = Button:create("Submit", x, (object.title_font:getHeight()+padding)*2 + padding*scale, 200*scale, object.button_font:getHeight())
 
 	y = 150 * scale
 
