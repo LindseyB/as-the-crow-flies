@@ -24,6 +24,7 @@ function loader()
 	main_menu = MainMenu:create()
 	highscore_table = HighscoreTable:create()
 	name_entry = NameEntry:create()
+	game_over = GameOver:create()
 
 	background = 1
 	speed = 200

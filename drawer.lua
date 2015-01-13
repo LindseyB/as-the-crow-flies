@@ -5,7 +5,7 @@ function drawer()
 	if state == States.Menu then
 		main_menu:draw()
 	elseif state == States.GameOver then
-		game_over_draw()
+		game_over:draw()
 	elseif state == States.Highscores then
 		highscore_table:draw()
 	elseif state == States.NameEntry then
@@ -15,11 +15,6 @@ function drawer()
 	end
 
 	snow_draw()
-end
-
-function game_over_draw()
-	love.graphics.setColor(100, 100, 100, 255)
-	love.graphics.printf("Game Over - Press Space\nYour Score Was: " .. score, 0, 100, love.graphics.getWidth(), "center")
 end
 
 function game_draw()

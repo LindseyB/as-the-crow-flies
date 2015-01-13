@@ -3,8 +3,6 @@ function updater(dt)
 
 	background = (background % #backgrounds) + 1
 
-	if state == States.GameOver then return end
-
 	if state == States.Highscores then
 		highscore_table:hover_state(love.mouse.getX(), love.mouse.getY())
 		return
@@ -20,6 +18,10 @@ function updater(dt)
 		return
 	end
 
+	if state == States.GameOver then
+		game_over:hover_state(love.mouse.getX(), love.mouse.getY())
+		return
+	end
 
 	text_update(dt)
 	animation_update(dt)
