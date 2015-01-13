@@ -11,11 +11,11 @@ function GameOver:create()
 	object.title_font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 
 	object.button_list = {
-		Button:create("Play Again", x, 250, 200*scale, object.button_font:getHeight()),
+		Button:create("Play Again", x, 150*scale, 200*scale, object.button_font:getHeight()),
 		{},
 		{},
 		{},
-		Button:create("Exit to Main", x, 250+object.button_font:getHeight()+padding, 200*scale, object.button_font:getHeight())
+		Button:create("Exit to Main", x, (150*scale+object.button_font:getHeight()+padding), 200*scale, object.button_font:getHeight())
 	}
 
 	return object
@@ -23,7 +23,7 @@ end
 
 function GameOver:draw()
 	love.graphics.setFont(self.title_font)
-	love.graphics.printf("Game Over", 0, (50*scale), love.graphics.getWidth(), "center")
+	love.graphics.printf("Game Over", 0, 50*scale, love.graphics.getWidth(), "center")
 	love.graphics.setFont(self.button_font)
 
 	for i, button in ipairs(self.button_list) do

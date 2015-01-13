@@ -26,6 +26,11 @@ function game_draw()
 	love.graphics.setColor(255, 255, 255, 130)
 	animation:draw(animation_x, animation_y)
 
+	-- bb
+	bb = animation:getBoundingBox(animation_x, animation_y)
+	love.graphics.setColor(255, 0, 0, 255)
+	love.graphics.rectangle("line", bb.x, bb.y, bb.width, bb.height)
+
 	-- poem
 	love.graphics.setColor(100, 100, 100, 255)
 	love.graphics.print(lines[line], text_x, text_y)

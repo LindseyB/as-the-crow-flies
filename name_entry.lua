@@ -14,12 +14,13 @@ function NameEntry:create()
 	padding = 20
 	x = love.graphics.getWidth()/2 - ((200/2)*scale)
 
-	object.submit = Button:create("Submit", x, 400, 200*scale, object.button_font:getHeight())
+	object.submit = Button:create("Submit", x, (object.title_font:getHeight()+padding)*2 + padding, 200*scale, object.button_font:getHeight())
 
+	y = 150 * scale
 
 	object.button_list = {
-		Button:create("Play Again", x, 300, 200*scale, object.button_font:getHeight()),
-		Button:create("View Highscores", x, 300+object.button_font:getHeight()+padding, 200*scale, object.button_font:getHeight())
+		Button:create("Play Again", x, y, 200*scale, object.button_font:getHeight()),
+		Button:create("View Highscores", x, (y+object.button_font:getHeight()+padding), 200*scale, object.button_font:getHeight())
 	}
 
 
@@ -28,9 +29,10 @@ end
 
 function NameEntry:draw()
 	love.graphics.setFont(self.title_font)
-	love.graphics.printf("Highscore " .. score, 0, 50, love.graphics.getWidth(), "center")
+	y = 50*scale
+	love.graphics.printf("Highscore " .. score, 0, y, love.graphics.getWidth(), "center")
 	if not self.submitted then
-		love.graphics.printf("Enter Initials: " .. name, 0, (60+self.title_font:getHeight()), love.graphics.getWidth(), "center")
+		love.graphics.printf("Enter Initials: " .. name, 0, y + self.title_font:getHeight(), love.graphics.getWidth(), "center")
 	end
 
 	love.graphics.setFont(self.button_font)

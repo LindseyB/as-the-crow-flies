@@ -13,12 +13,13 @@ function MainMenu:create()
 	padding = 20
 
 	x = love.graphics.getWidth()/2 - ((200/2)*scale)
+	y = 150*scale
 
 	object.button_list = {
-		Button:create("Play", x, 250, 200*scale, object.button_font:getHeight()),
-		Button:create("Highscores", x, 250+object.button_font:getHeight()+padding, 200*scale, object.button_font:getHeight()),
-		Button:create("Credits", x, 250+((object.button_font:getHeight()+padding)*2), 200*scale, object.button_font:getHeight()),
-		Button:create("Exit", x, 250+((object.button_font:getHeight()+padding)*3), 200*scale, object.button_font:getHeight())
+		Button:create("Play", x, y, 200*scale, object.button_font:getHeight()),
+		Button:create("Highscores", x, (y+object.button_font:getHeight()+padding), 200*scale, object.button_font:getHeight()),
+		Button:create("Credits", x, y+((object.button_font:getHeight()+padding)*2), 200*scale, object.button_font:getHeight()),
+		Button:create("Exit", x, y+((object.button_font:getHeight()+padding)*3), 200*scale, object.button_font:getHeight())
 	}
 
 	return object
