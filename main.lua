@@ -76,6 +76,6 @@ function reset()
 	text_x = love.graphics.getWidth()
 	text_y = math.random(love.graphics.getHeight())
 	line = 1
-	text_speed = 200
+	text_speed = 200*scale
 	score = 0
 end

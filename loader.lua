@@ -28,7 +28,7 @@ function loader()
 
 	background = 1
 	speed = 200
-	text_speed = 200
+	text_speed = 200*scale
 	name = ""
 
 	Buttons = {
