@@ -15,10 +15,12 @@ function h.set(filename, places, name, score)
 end
 
 function h.load()
-	local file = love.filesystem.newFile(h.filename)
-	if not love.filesystem.exists(h.filename) or not file:open("r") then
-		local file = io.open(h.filename, "r")
+	if love._os == "Windows" then
+		file = io.open(h.filename, "r")
 		if file == nil then return end
+	else
+		file = love.filesystem.newFile(h.filename)
+		if not love.filesystem.exists(h.filename) or not file:open("r") then return end
 	end
 	h.scores = {}
 	for line in file:lines() do
@@ -37,10 +39,12 @@ function h.add(name, score)
 end
 
 function h.save()
-	local file = love.filesystem.newFile(h.filename)
-	if not file:open("w") then
-		local file = io.open(h.filename, "w")
+	if love._os == "Windows" then
+		file = io.open(h.filename, "w")
 		if file == nil then return end
+	else
+		file = love.filesystem.newFile(h.filename)
+		if not file:open("w") then return end
 	end
 	for i = 1, #h.scores do
 		item = h.scores[i]
