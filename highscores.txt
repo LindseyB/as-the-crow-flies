@@ -1,0 +1,9 @@
+6	leb
+5	AAA
+5	AAA
+5	AAA
+5	AAA
+5	AAA
+5	AAA
+5	AAA
+5	AAA

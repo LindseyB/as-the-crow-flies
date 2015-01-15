@@ -15,8 +15,8 @@ function h.set(filename, places, name, score)
 end
 
 function h.load()
-	local file = love.filesystem.newFile(h.filename)
-	if not love.filesystem.exists(h.filename) or not file:open("r") then return end
+	local file = io.open(h.filename, "r")
+	if file == nil then return end
 	h.scores = {}
 	for line in file:lines() do
 		local i = line:find('\t', 1, true)
@@ -34,8 +34,8 @@ function h.add(name, score)
 end
 
 function h.save()
-	local file = love.filesystem.newFile(h.filename)
-	if not file:open("w") then return end
+	local file = io.open(h.filename, "w")
+	if file == nil then return end
 	for i = 1, #h.scores do
 		item = h.scores[i]
 		file:write(item[1] .. "\t" .. item[2] .. "\n")
