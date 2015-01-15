@@ -43,7 +43,7 @@ function love.keypressed(key, isrepeat)
 end
 
 function love.textinput(t)
-	if string.len(name) < 3 then
+	if string.len(name) < 3 and t ~= " " then
 		name = name .. t
 	end
 end
