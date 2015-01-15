@@ -48,7 +48,11 @@ function text_update(dt)
 
 		line = (line % #lines) + 1
 		text_x = love.graphics.getWidth()
-		text_y = math.random(love.graphics.getHeight()-font:getHeight())
+		if line == 1 then
+			text_y = love.graphics.getHeight()/2
+		else
+			text_y = math.random(love.graphics.getHeight()-font:getHeight())
+		end
 	end
 end
 
