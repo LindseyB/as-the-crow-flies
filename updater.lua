@@ -43,7 +43,7 @@ function text_update(dt)
 	if text_x <= -(font:getWidth(lines[line])) then
 		if state == States.Play then score = score + 1 end
 
-		if score % 3 == 0 then text_speed = text_speed + 50*scale end
+		if state == States.Play and score % 3 == 0 then text_speed = text_speed + 50*scale end
 
 		line = (line % #lines) + 1
 		text_x = love.graphics.getWidth()
