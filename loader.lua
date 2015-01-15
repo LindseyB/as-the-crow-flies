@@ -25,6 +25,7 @@ function loader()
 	highscore_table = HighscoreTable:create()
 	name_entry = NameEntry:create()
 	game_over = GameOver:create()
+	credits = Credits:create()
 
 	background = 1
 	speed = 200

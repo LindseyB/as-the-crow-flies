@@ -9,6 +9,7 @@ require "sick"
 require "highscore_table"
 require "name_entry"
 require "game_over"
+require "credits"
 
 function love.conf(t)
 	t.identity = "as-the-crow-flies"
@@ -50,11 +51,12 @@ end
 
 function love.mousepressed(x, y, button)
 	love.graphics.setFont(font)
-	if (state ~= States.Play and state ~= States.Credits) and button == "l" then
+	if state ~= States.Play and button == "l" then
 		if state == States.Menu then clicked = main_menu:click(x,y) end
 		if state == States.Highscores then clicked = highscore_table:click(x,y) end
 		if state == States.NameEntry then clicked = name_entry:click(x,y) end
 		if state == States.GameOver then clicked = game_over:click(x,y) end
+		if state == States.Credits then clicked = credits:click(x,y) end
 
 		if clicked == Buttons.Play then
 			reset()
@@ -62,7 +64,6 @@ function love.mousepressed(x, y, button)
 			love.mouse.setVisible(false)
 			state = States.Paused
 		elseif clicked == Buttons.Credits then
-			love.mouse.setVisible(false)
 			load_credits()
 			state = States.Credits
 		elseif clicked == Buttons.Highscores then

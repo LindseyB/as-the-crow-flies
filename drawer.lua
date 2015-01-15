@@ -10,6 +10,9 @@ function drawer()
 		highscore_table:draw()
 	elseif state == States.NameEntry then
 		name_entry:draw()
+	elseif state == States.Credits then
+		credits:draw()
+		game_draw()
 	else
 		game_draw()
 	end

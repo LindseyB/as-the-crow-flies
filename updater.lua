@@ -25,6 +25,11 @@ function updater(dt)
 		return
 	end
 
+	if state == States.Credits then
+		credits:hover_state(love.mouse.getX(), love.mouse.getY())
+		-- don't return need the other updates too
+	end
+
 	text_update(dt)
 	animation_update(dt)
 
