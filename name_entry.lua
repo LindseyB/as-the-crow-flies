@@ -71,10 +71,10 @@ end
 
 function NameEntry:click(x, y)
 	if self.submitted then
-		self.submitted = false
 		for i, button in ipairs(self.button_list) do
 			if x >= button.x and x < button.x + button.width
 			and y >= button.y and y < button.y + button.height then
+				self.submitted = false
 				return i
 			end
 		end
