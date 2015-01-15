@@ -8,7 +8,7 @@ function loader()
 	scale = love.graphics.getHeight()/600
 
 	love.keyboard.setTextInput(false)
-	highscore.set("highscores", 8, "AAA", 5)
+	highscore.set("highscores.txt", 8, "AAA", 5)
 
 	font = love.graphics.newFont("assets/fonts/AmaticSC-Regular.ttf", 80*scale)
 

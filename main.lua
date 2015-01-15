@@ -10,6 +10,11 @@ require "highscore_table"
 require "name_entry"
 require "game_over"
 
+function love.conf(t)
+	t.identity = "as-the-crow-flies"
+	t.version = "0.9.0"
+end
+
 
 function love.load()
 	loader()
