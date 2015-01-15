@@ -1,0 +1,14 @@
+Running:
+	- Windows: Just run the included .exe file
+	- OS X: Run the included .app file
+	- Linux: Install version 0.9.0+ of Love (https://love2d.org/) and run the .love file with it
+		- If on a debian system you can do the following (files on love2d.org):
+			1. install the liblove*.deb
+			2. install the love_*.deb
+
+If you need any help running contact me on twitter: @lindseybieda
+
+Controls:
+	- escape: Quits the game at anytime
+	- space: Raise the crow up
+	- p: pauses the game
