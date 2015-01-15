@@ -20,7 +20,11 @@ function NameEntry:create()
 
 	object.button_list = {
 		Button:create("Play Again", x, y, 200*scale, object.button_font:getHeight()),
-		Button:create("View Highscores", x, (y+object.button_font:getHeight()+padding), 200*scale, object.button_font:getHeight())
+		Button:create("View Highscores", x, (y+object.button_font:getHeight()+padding), 200*scale, object.button_font:getHeight()),
+		{},
+		{},
+		Button:create("Exit to Main", x, y+((object.button_font:getHeight()+padding)*3), 200*scale, object.button_font:getHeight())
+
 	}
 
 
@@ -39,7 +43,9 @@ function NameEntry:draw()
 
 	if self.submitted then
 		for i, button in ipairs(self.button_list) do
-			button:draw()
+			if button.draw ~= nil then
+				button:draw()
+			end
 		end
 	else
 		self.submit:draw()
@@ -50,13 +56,17 @@ function NameEntry:hover_state(x, y)
 
 	if self.submitted then
 		for i, button in ipairs(self.button_list) do
-			button.hover = false
+			if button.hover ~= nil then
+				button.hover = false
+			end
 		end
 
 		for i, button in ipairs(self.button_list) do
-			if x >= button.x and x < button.x + button.width
-			and y >= button.y and y < button.y + button.height then
-				button.hover = true
+			if button.hover ~= nil then
+				if x >= button.x and x < button.x + button.width
+				and y >= button.y and y < button.y + button.height then
+					button.hover = true
+				end
 			end
 		end
 	else
@@ -72,10 +82,12 @@ end
 function NameEntry:click(x, y)
 	if self.submitted then
 		for i, button in ipairs(self.button_list) do
-			if x >= button.x and x < button.x + button.width
-			and y >= button.y and y < button.y + button.height then
-				self.submitted = false
-				return i
+			if button.draw ~= nil then
+				if x >= button.x and x < button.x + button.width
+				and y >= button.y and y < button.y + button.height then
+					self.submitted = false
+					return i
+				end
 			end
 		end
 	else
