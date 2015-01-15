@@ -71,6 +71,7 @@ function collision_update()
 end
 
 function process_gameover()
+	love.mouse.setVisible(true)
 	if score > highscore.scores[8][1] then
 		love.keyboard.setTextInput(true)
 		state = States.NameEntry

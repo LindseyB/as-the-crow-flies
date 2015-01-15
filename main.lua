@@ -54,6 +54,7 @@ function love.mousepressed(x, y, button)
 		if clicked == Buttons.Play then
 			reset()
 			load_poem()
+			love.mouse.setVisible(false)
 			state = States.Paused
 		elseif clicked == Buttons.Credits then
 			load_credits()
