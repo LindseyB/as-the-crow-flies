@@ -63,6 +63,12 @@ function animation_update(dt)
 	else
 		animation_y = animation_y + speed * dt * scale
 	end
+
+	if state == States.Credits and animation_y > (love.graphics.getHeight() - animation.height) then
+		animation_y = (love.graphics.getHeight() - animation.height)
+	elseif state == States.Credits and animation_y < 0 then
+		animation_y = 0
+	end
 end
 
 function collision_update()
