@@ -57,6 +57,7 @@ function love.mousepressed(x, y, button)
 			love.mouse.setVisible(false)
 			state = States.Paused
 		elseif clicked == Buttons.Credits then
+			love.mouse.setVisible(false)
 			load_credits()
 			state = States.Credits
 		elseif clicked == Buttons.Highscores then

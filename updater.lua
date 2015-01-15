@@ -36,6 +36,7 @@ function text_update(dt)
 
 	if state == States.Credits and text_x <= -(font:getWidth(lines[line])) then
 		if line == #lines then
+			love.mouse.setVisible(true)
 			state = States.Menu
 		end
 	end
