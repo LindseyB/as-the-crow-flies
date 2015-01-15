@@ -19,7 +19,7 @@ function loader()
 	load_music()
 
 	text_x = love.graphics.getWidth()
-	text_y = math.random(love.graphics.getHeight())
+	text_y = love.graphics.getHeight()/2
 
 	main_menu = MainMenu:create()
 	highscore_table = HighscoreTable:create()
