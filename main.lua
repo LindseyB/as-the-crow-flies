@@ -82,7 +82,7 @@ function reset()
 	animation_x = (love.graphics.getWidth() - animation.width)/2
 	animation_y = (love.graphics.getHeight() - animation.height)/2
 	text_x = love.graphics.getWidth()
-	text_y = math.random(love.graphics.getHeight())
+	text_y = love.graphics.getHeight()/2
 	line = 1
 	text_speed = 200*scale
 	score = 0
